@@ -1,0 +1,25 @@
+html{
+    font-family: sans-serif;
+}
+
+body{
+    margin: 0;
+}
+
+header{
+    background-color:cornflowerblue;
+    color: white;
+    font-size: 80px;
+    text-align: center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+article{
+    padding: 100px;
+    margin: 100px;
+    background-color: aliceblue;
+}
+
+section{
+    display: flex;
+}
