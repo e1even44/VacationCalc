@@ -6,20 +6,27 @@ body{
     margin: 0;
 }
 
-header{
-    background-color:cornflowerblue;
+div{
+    background-color:#C5DBDB;
     color: white;
     font-size: 80px;
-    text-align: center;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 article{
     padding: 100px;
     margin: 100px;
-    background-color: aliceblue;
+    background-color: #00474A;
+    color: white;
 }
 
 section{
     display: flex;
+}
+
+button{
+    background-color: white;
+    font-size: 20px;
+    align-self: center;
+    border-color: transparent;
 }
