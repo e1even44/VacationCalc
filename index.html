@@ -2,52 +2,80 @@
 <html lang="de-at">
 
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width"/>
-<link rel="stylesheet" type="text/css" href="styles.css"/>
-<link rel="icon" type="image/x-icon" href="c:\Users\Hilal\Downloads\logo_excl._name\logo_excl._name_ico16.ico">
-<title>Oh Deer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="c:\Users\Hilal\Downloads\logo_excl._name\logo_excl._name_ico16.ico">
+    <title>Oh Deer</title>
 </head>
 
 <body>
     <div>
         <img src="c:\Users\Hilal\Downloads\logo_incl._name_scaled.png" alt="OhDeer Logo">
-        <input type="button" value="Einstellungen" class="right"/>
-        </div>
+    </div>
 
-        <!--page layout-->
-        <div class="container">
-            <div class="toppanel">
-            <h1 class="webpage-title">Resturlaubsstunden-Rechner, oder so.</h1>    
+    <!--page layout-->
+    <div class="container">
+        <div class="toppanel"></div>
+        <div class="d-flex">
+            <div class="leftpanel">
+
+
             </div>
-            <div class="d-flex">
-              <div class="leftpanel">
-                <h1>LEFT</h1>
-              </div>
-              <div class="middlepanel">MIDDLE</div>
-              
-              <div class="rightpanel">
-                    <!-- menu to (un)check betriebsurlaub and fenstertage -->
-            <fieldset>
-                <legend>Welche art freier Tage möchtest du in der Kalkulation miteinbeziehen?</legend>
-                <div>
-                <input type="checkbox" id="fenstertage" name="fenstertage" checked/>
-                <label for="fenstertage">Fenstertage</label>
-                <br>
-                <input type="checkbox" id="betriebsurlaub" name="betriebsurlaub" checked/>
-                <label for="betriebsurlaub">Betriebsurlaub</label>
+
+            <div class="middlepanel">
+                <div class="wrapper">
+                    <div>
+                        <input type="image" src="c:\Users\Hilal\Downloads\rsz_button-previous.png" />
+                    </div>
+                    <div>
+                        <datetd></datetd>
+                    </div>
+                    <div>
+                        <input type="image" src="c:\Users\Hilal\Downloads\rsz_button-next.png" />
+                    </div>
+                    <div>min. Urlaubsstunden zum Stichtag:</div>
+                    <div>42.5h</div>
+                    <div> </div>
                 </div>
-            </fieldset>
+
+
             </div>
+
+            <div class="rightpanel">
+                <!-- menu to (un)check betriebsurlaub and fenstertage -->
+                <fieldset>
+                    <legend>Welche art freier Tage möchtest du in der Kalkulation miteinbeziehen?</legend>
+                    <div>
+                        <input type="checkbox" id="fenstertage" name="fenstertage" checked />
+                        <label for="fenstertage">Fenstertage</label>
+                        <br>
+                        <input type="checkbox" id="betriebsurlaub" name="betriebsurlaub" checked />
+                        <label for="betriebsurlaub">Betriebsurlaub</label>
+                    </div>
+                </fieldset>
             </div>
-          </div>
+        </div>
+    </div>
 
 
 
-        <!-- scripts -->
-        <script>
-            document.querySelector('datetd').innerText = new Date().toLocaleDateString();
-        </script>        
+    <!-- scripts -->
+    <script>
+        let dateToday = document.querySelector('datetd').innerText = new Date().toLocaleDateString();
+
+        function calcPreviousDay() {
+            const previousDay = new Date();
+            previousDay.setDate(previousDay.getDate() - 1);
+            return previousDay.toLocaleDateString();
+        }
+
+        function calcNextDay() {
+            const nextDay = new Date();
+            nextDay.setDate(nextday.getDate() + 1);
+            return nextday.toLocaleDateString();
+        }
+    </script>
 </body>
 
 </html>
