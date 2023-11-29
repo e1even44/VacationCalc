@@ -6,22 +6,52 @@ body{
     margin: 0;
 }
 
-div{
-    background-color:#C5DBDB;
+.webpage-title{
     color: white;
-    font-size: 80px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
 }
+
+/* page layout */
+.container{
+width: 100%;
+height: 100vh;
+}
+
+.toppanel{
+    width: 100%;
+    height: 100px;
+    background-color: #00474A;
+}
+
+.leftpanel{
+    width: 25%;
+    height: 100vh;
+    background-color: yellow;
+}
+
+.middlepanel{
+    width: 50%;
+    height: 100vh;
+    background-color: white;
+}
+
+.rightpanel{
+    width: 25%;
+    height: 100vh;
+    background-color: #94B4B5;
+}
+
+.d-flex{
+    display: flex;
+}
+/* page layout */
 
 article{
     padding: 100px;
     margin: 100px;
     background-color: #00474A;
     color: white;
-}
-
-section{
-    display: flex;
+    float: center;
 }
 
 button{
@@ -30,3 +60,20 @@ button{
     align-self: center;
     border-color: transparent;
 }
+
+input.right{
+    float: right;
+}
+
+p,
+label {
+  font:
+    1rem 'Fira Sans',
+    sans-serif;
+}
+
+input {
+  margin: 0.4rem;
+}
+
+
