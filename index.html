@@ -4,15 +4,18 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css/general-layout.css" />
+    <link rel="stylesheet" type="text/css" href="/css/page-layout.css"/>
     <link rel="icon" type="image/x-icon" href="/resources/logo_excl._name_ico16.ico">
-    <script src="demo.js"></script>
     <title>Oh Deer</title>
 </head>
 
 <body>
+
+
     <div>
         <img src="resources/logo_incl._name_scaled.png" alt="OhDeer Logo">
+        <input type="button" id="button-lightsoff" value="&#x262F">
     </div>
 
     <!--page layout-->
@@ -45,7 +48,7 @@
                 <div>
                     <wrapper class="view-freieTage-month">
                         <div>
-                            <p>Freie Tage im aktuellen Monat:</p>
+                            <p class="freedays-month">Freie Tage im aktuellen Monat:</p>
                             <ul>
                                 <div>6.12. Nikolaus</div>
                                 <div>8.12. Feiertag</div>
@@ -68,9 +71,7 @@
                         <input type="checkbox" id="betriebsurlaub" name="betriebsurlaub" checked />
                         <label for="betriebsurlaub">Betriebsurlaub</label>
                 </fieldset>
-
                 <br>
-
                 <fieldset class="workweek-table">
                     <legend>Arbeitsstunden pro Tag: </legend>
                     <label>Montag</label>
@@ -85,11 +86,16 @@
                     <input class="workhours-input" type="text" id="freitag" placeholder="5.5">
                 </fieldset>
             </div>
+        </div>
 
+        <div class="bottonpanel">
+            <div class="mockup-link">AGB</div>
+            <div class="mockup-link">FAQ</div>
         </div>
     </div>
-    </div>
+    <!--page layout-->
 
+    <script src="/js/demo.js"></script>
 </body>
 
 </html>

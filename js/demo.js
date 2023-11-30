@@ -1,7 +1,7 @@
 // scripts
 
     const dateToday = document.querySelector('datetd').innerText = new Date().toLocaleDateString();
-
+    
     function calcPreviousDay() {
         const previousDay = new Date();
         previousDay.setDate(previousDay.getDate() - 1);

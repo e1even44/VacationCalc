@@ -2,6 +2,7 @@
     --ohdeerdark: #00474A;
     --ohdeeralmostdark: #06767A;
     --ohdeerlighter: #94B4B5;
+    --linkblue: #0645AD;
 }
 
 html {
@@ -10,55 +11,6 @@ html {
 
 body {
     margin: 0;
-}
-
-h4 {
-    display: flex;
-    align-self: center;
-}
-
-/* page layout */
-.container {
-    width: 100%;
-    height: 100vh;
-}
-
-.toppanel {
-    width: 100%;
-    height: 50px;
-    background-color: var(--ohdeerdark);
-}
-
-.sidepanel {
-    width: 15%;
-    height: 100vh;
-    background-color: whitesmoke;
-}
-
-.main-content {
-    width: 70%;
-    height: 100vh;
-    background-color: white;
-}
-
-.d-flex {
-    display: flex;
-}
-
-/* page layout */
-
-.wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 2fr 1fr;
-}
-
-.wrapper {
-    border: 2px solid var(--ohdeerdark);
-    border-radius: 5px;
-    background-color: var(--ohdeerlighter);
-    text-align: center;
-    font-size: 35px;
 }
 
 article {
@@ -118,13 +70,46 @@ button:hover {
 .workweek-table {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1r 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 
 #settings-header {
     width: 100%;
-    margin:20px 10px 5px;
+    margin: 20px 10px 5px;
     text-align: left;
     font-weight: bolder;
     font-size: 24px;
+}
+
+p.freedays-month {
+    margin: 30px 30px 10px;
+}
+
+.mockup-link {
+    color: var(--linkblue);
+    cursor: pointer;
+    font-weight: bolder;
+    margin: 0px 15px 20px;
+}
+
+.mockup-link:hover {
+    text-decoration: underline;
+}
+
+#button-lightsoff {
+    height: 60px;
+    width: 60px;
+    float: right;
+    border-radius: 100%;
+    color: var(--ohdeerlighter);
+    font-size: 50px;
+    background-color: transparent;
+    border-color: transparent;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+#button-lightsoff:hover {
+    color: var(--ohdeeralmostdark);
 }
