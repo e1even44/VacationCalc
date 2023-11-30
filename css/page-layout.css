@@ -24,6 +24,8 @@
     width: 100%;
     height: 25px;
     background-color: var(--ohdeerlighter);
+    display: flex;
+    justify-content: space-between;
 }
 
 .sidepanel {

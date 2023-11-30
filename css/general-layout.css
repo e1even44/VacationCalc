@@ -13,6 +13,7 @@ body {
     margin: 0;
 }
 
+/* cut here */
 article {
     padding: 100px;
     margin: 100px;
@@ -34,9 +35,7 @@ input.right {
 
 p,
 label {
-    font:
-        1rem 'Fira Sans',
-        sans-serif;
+    font: 1rem 'Fira Sans', sans-serif;
 }
 
 input {
@@ -55,7 +54,7 @@ button.round-button {
     transition: background-color 0.5s;
 }
 
-button:hover {
+button.round-button:hover {
     background-color: var(--ohdeerdark);
 }
 
@@ -107,7 +106,7 @@ p.freedays-month {
     border-color: transparent;
     font-weight: bold;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color 0.5s;
 }
 
 #button-lightsoff:hover {
