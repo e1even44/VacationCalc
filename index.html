@@ -5,77 +5,91 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link rel="icon" type="image/x-icon" href="c:\Users\Hilal\Downloads\logo_excl._name\logo_excl._name_ico16.ico">
+    <link rel="icon" type="image/x-icon" href="/resources/logo_excl._name_ico16.ico">
+    <script src="demo.js"></script>
     <title>Oh Deer</title>
 </head>
 
 <body>
     <div>
-        <img src="c:\Users\Hilal\Downloads\logo_incl._name_scaled.png" alt="OhDeer Logo">
+        <img src="resources/logo_incl._name_scaled.png" alt="OhDeer Logo">
     </div>
 
     <!--page layout-->
     <div class="container">
         <div class="toppanel"></div>
         <div class="d-flex">
-            <div class="leftpanel">
-
-
+            <div class="sidepanel">
             </div>
-
-            <div class="middlepanel">
+            <div class="main-content">
                 <div class="wrapper">
                     <div>
-                        <input type="image" src="c:\Users\Hilal\Downloads\rsz_button-previous.png" value=" "/>
+                        <button class="round-button" id="left-button">&laquo;</button>
                     </div>
                     <div>
                         <datetd></datetd>
                     </div>
                     <div>
-                        <input type="image" src="c:\Users\Hilal\Downloads\rsz_button-next.png" value=" "/>
+                        <button class="round-button" id="right-button">&raquo;</button>
                     </div>
-                    <div>min. Urlaubsstunden zum Stichtag:</div>
-                    <div>42.5h</div>
-                    <div> </div>
+                    <div></div>
+                    <div>
+                        <p>min. Urlaubsstunden zum Stichtag:</p>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div>
+                        <p>42.5h</p>
+                    </div>
                 </div>
-
-
+                <div>
+                    <wrapper class="view-freieTage-month">
+                        <div>
+                            <p>Freie Tage im aktuellen Monat:</p>
+                            <ul>
+                                <div>6.12. Nikolaus</div>
+                                <div>8.12. Feiertag</div>
+                                <div>24.12. Heilig Abend</div>
+                            </ul>
+                        </div>
+                    </wrapper>
+                </div>
             </div>
-
-            <div class="rightpanel">
-                <!-- menu to (un)check betriebsurlaub and fenstertage -->
+            <!-- menu to (un)check "betriebsurlaub" and "fenstertage" -->
+            <div class="sidepanel" id="settings">
+                <div id="settings-header">Einstellungen</div>
+                <br>
                 <fieldset>
-                    <legend>Welche art freier Tage möchtest du in der Kalkulation miteinbeziehen?</legend>
+                    <legend>Welche Art freier Tage möchtest du in der Kalkulation miteinbeziehen?</legend>
                     <div>
                         <input type="checkbox" id="fenstertage" name="fenstertage" checked />
                         <label for="fenstertage">Fenstertage</label>
                         <br>
                         <input type="checkbox" id="betriebsurlaub" name="betriebsurlaub" checked />
                         <label for="betriebsurlaub">Betriebsurlaub</label>
-                    </div>
+                </fieldset>
+
+                <br>
+
+                <fieldset class="workweek-table">
+                    <legend>Arbeitsstunden pro Tag: </legend>
+                    <label>Montag</label>
+                    <input class="workhours-input" type="text" id="montag" placeholder="8.25">
+                    <label>Dienstag</label>
+                    <input class="workhours-input" type="text" id="dienstag" placeholder="8.25">
+                    <label>Mittwoch</label>
+                    <input class="workhours-input" type="text" id="mittwoch" placeholder="8.25">
+                    <label>Donnerstag</label>
+                    <input class="workhours-input" type="text" id="donnerstag" placeholder="8.25">
+                    <label>Freitag</label>
+                    <input class="workhours-input" type="text" id="freitag" placeholder="5.5">
                 </fieldset>
             </div>
+
         </div>
     </div>
+    </div>
 
-
-
-    <!-- scripts -->
-    <script>
-        let dateToday = document.querySelector('datetd').innerText = new Date().toLocaleDateString();
-
-        function calcPreviousDay() {
-            const previousDay = new Date();
-            previousDay.setDate(previousDay.getDate() - 1);
-            return previousDay.toLocaleDateString();
-        }
-
-        function calcNextDay() {
-            const nextDay = new Date();
-            nextDay.setDate(nextday.getDate() + 1);
-            return nextday.toLocaleDateString();
-        }
-    </script>
 </body>
 
 </html>
