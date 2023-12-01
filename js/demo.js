@@ -1,16 +1,20 @@
 // scripts
 
-    const dateToday = document.querySelector('datetd').innerText = new Date().toLocaleDateString();
-    
-    function calcPreviousDay() {
-        const previousDay = new Date();
-        previousDay.setDate(previousDay.getDate() - 1);
-        return previousDay.toLocaleDateString();
-    }
+const dateToday = document.querySelector('datetd').innerText = new Date().toLocaleDateString();
 
-    function calcNextDay() {
-        const nextDay = new Date();
+function calcPreviousDay() {
+    const previousDay = new Date();
+    previousDay.setDate(previousDay.getDate() - 1);
+    return previousDay.toLocaleDateString();
+}
 
-        nextDay.setDate(nextday.getDate() + 1);
-        return nextday.toLocaleDateString();
-    }
+function calcNextDay() {
+    const nextDay = new Date();
+    nextDay.setDate(nextday.getDate() + 1);
+    return nextday.toLocaleDateString();
+}
+
+function updateDate() {
+    const resultElement = document.querySelector('datetd');
+    resultElement.textContent = calcPreviousDay();
+}
