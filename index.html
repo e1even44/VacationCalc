@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="resturlaubsstunden-rechner">
     <link rel="stylesheet" type="text/css" href="/css/general-layout.css" />
-    <link rel="stylesheet" type="text/css" href="/css/page-layout.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/page-layout.css" />
     <link rel="icon" type="image/x-icon" href="/resources/logo_excl._name_ico16.ico">
     <title>Oh Deer</title>
 </head>
 
 <body>
-
 
     <div>
         <img src="resources/logo_incl._name_scaled.png" alt="OhDeer Logo">
@@ -50,15 +50,15 @@
                         <div>
                             <p class="freedays-month">Freie Tage im aktuellen Monat:</p>
                             <ul>
-                                <div>6.12. Nikolaus</div>
-                                <div>8.12. Feiertag</div>
-                                <div>24.12. Heilig Abend</div>
+                                <li>6.12. Nikolaus</li>
+                                <li>8.12. Feiertag</li>
+                                <li>24.12. Heilig Abend</li>
                             </ul>
                         </div>
                     </wrapper>
                 </div>
             </div>
-            <!-- menu to (un)check "betriebsurlaub" and "fenstertage" -->
+
             <div class="sidepanel" id="settings">
                 <div id="settings-header">Einstellungen</div>
                 <br>
@@ -73,18 +73,20 @@
                 </fieldset>
                 <br>
                 <fieldset class="workweek-table">
-                    <legend>Arbeitsstunden pro Tag: </legend>
-                    <label>Montag</label>
-                    <input class="workhours-input" type="text" id="montag" placeholder="8.25">
-                    <label>Dienstag</label>
-                    <input class="workhours-input" type="text" id="dienstag" placeholder="8.25">
-                    <label>Mittwoch</label>
-                    <input class="workhours-input" type="text" id="mittwoch" placeholder="8.25">
-                    <label>Donnerstag</label>
-                    <input class="workhours-input" type="text" id="donnerstag" placeholder="8.25">
-                    <label>Freitag</label>
-                    <input class="workhours-input" type="text" id="freitag" placeholder="5.5">
+                    <legend>Arbeitsstunden pro Tag </legend>
+                    <label for="montag">Montag</label>
+                    <input class="workhours-input" type="text" id="montag" value="8:15">
+                    <label for="dienstag">Dienstag</label>
+                    <input class="workhours-input" type="text" id="dienstag" value="8:15">
+                    <label for="mittwoch">Mittwoch</label>
+                    <input class="workhours-input" type="text" id="mittwoch" value="8:15">
+                    <label for="donnerstag">Donnerstag</label>
+                    <input class="workhours-input" type="text" id="donnerstag" value="8:15">
+                    <label for="freitag">Freitag</label>
+                    <input class="workhours-input" type="text" id="freitag" value="5:30">
                 </fieldset>
+                <br>
+                <input type="button" id="save-button" value="Einstellungen speichern">
             </div>
         </div>
 

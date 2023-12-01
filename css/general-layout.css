@@ -72,6 +72,10 @@ button.round-button:hover {
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 
+.workhours-input{
+    width: 120px;
+}
+
 #settings-header {
     width: 100%;
     margin: 20px 10px 5px;
@@ -100,7 +104,7 @@ p.freedays-month {
     width: 60px;
     float: right;
     border-radius: 100%;
-    color: var(--ohdeerlighter);
+    color: var(--ohdeeralmostdark);
     font-size: 50px;
     background-color: transparent;
     border-color: transparent;
@@ -110,5 +114,25 @@ p.freedays-month {
 }
 
 #button-lightsoff:hover {
-    color: var(--ohdeeralmostdark);
+    color: var(--ohdeerdark);
+}
+
+li{
+    list-style:none;
+}
+
+#save-button{
+    width: 250px;
+    height:40px;
+    background-color:var(--ohdeeralmostdark);
+    color: white;
+    font-weight: bolder;
+    border-color: transparent;
+    cursor: pointer;
+    border-radius: 14px;
+    transition: background-color 0.5s;
+}
+
+#save-button:hover{
+    background-color: var(--ohdeerdark);
 }
