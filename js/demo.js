@@ -10,11 +10,16 @@ function calcPreviousDay() {
 
 function calcNextDay() {
     const nextDay = new Date();
-    nextDay.setDate(nextday.getDate() + 1);
-    return nextday.toLocaleDateString();
+    nextDay.setDate(nextDay.getDate() + 1);
+    return nextDay.toLocaleDateString();
 }
 
 function updateDate() {
     const resultElement = document.querySelector('datetd');
     resultElement.textContent = calcPreviousDay();
+}
+
+function updateDateNxt() {
+    const resultElement = document.querySelector('datetd');
+    resultElement.textContent = calcNextDay();
 }
