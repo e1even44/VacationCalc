@@ -1,6 +1,6 @@
 // scripts
 
-const dateToday = document.querySelector('datetd').innerText = new Date().toLocaleDateString();
+// document.querySelector('datetd').innerText = new Date().toLocaleDateString();
 
 function calcPreviousDay() {
     const previousDay = new Date();
@@ -34,17 +34,22 @@ function updateDateNxt() {
 //     isCompanyHoliday: false
 // };
 
-const getDay = (date, obj = {}) => ({
-    date: date.toDateString(),
-    isWeekend: false, // default value
-    isNationalHoliday: false, // default value
-    isGapDay: false, // default value
-    isCompanyHoliday: false, // default value
-    ...obj,
-});
+const getDay = (date, obj = {}) => {
+    return ({
+        date: date.toDateString(),
+        isWeekend: false, // default value
+        isNationalHoliday: false, // default value
+        isGapDay: false, // default value
+        isCompanyHoliday: false, // default value
+        ...obj,
+    });
+}
 
-function get365days(year) {
-    const daysOfYear = []; // collection of each date of year
+let daysOfYear = []; // collection of each date of year
+
+//works fine
+const get365days = (year) => {
+    daysOfYear = [];
 
     const startDate = new Date(year, 0, 1); // jan 1st 
     const endDate = new Date(year, 11, 31); // decemter 31th
@@ -56,83 +61,60 @@ function get365days(year) {
         daysOfYear.push(day);
         startDate.setDate(startDate.getDate() + 1);
     }
-    return daysOfYear;
 }
 
-function isWeekend(year) {
-    const daysOfYear = get365days(year);
-
+//works fine
+function isWeekend() {
     for (let i = 0; i < daysOfYear.length; i++) {
-        if (daysOfYear[i].includes("Sat") || daysOfYear[i].includes("Sun")) {
-            // return true;
-            daysOfYear[i].day = {
-                isWeekend: true
-            };
-        }
-        else {
-            // return false;
-            daysOfYear[i].day = {
-                isWeekend: false
-            }
-        }
+        daysOfYear[i].isWeekend = daysOfYear[i].date.includes("Sat") || daysOfYear[i].date.includes("Sun")
     }
 }
 
-// TODO switch this up with json (aut_nationalholidays)
-let nationalHolidays = [
-    new Date(2024, 0, 1),
-    new Date(2024, 0, 6),
-    new Date(2024, 3, 1),
-    new Date(2024, 4, 1),
-    new Date(2024, 4, 9),
-    new Date(2024, 4, 19),
-    new Date(2024, 4, 20),
-    new Date(2024, 4, 30),
-    new Date(2024, 7, 15),
-    new Date(2024, 9, 26),
-    new Date(2024, 10, 1),
-    new Date(2024, 11, 8),
-    new Date(2024, 11, 25),
-    new Date(2024, 11, 26)]
+// fetches array of national holiday dates from json file and returns an to-local-date-array 
+async function fetchJson(path) {
+    const r = await fetch(`../${path}`)
+        .then(response => response.json());
 
-function isNationalHoliday(year) {
-    const daysOfYear = get365days(year);
+    r.forEach(element => {
+        element.date = new Date(element.date).toDateString();
+    });
+
+    return r;
+}
+
+//works fine
+async function isNationalHoliday() {
+    const nationalHolidays = await fetchJson('json/aut_nationalholidays.json');
 
     for (let i = 0; i < daysOfYear.length; i++) {
-        for (let j = 0; j < nationalHolidays.length; j++) {
-            if (daysOfYear[i].getDate() === nationalHolidays[j]) {
-                // return true;
-                daysOfYear[i].day = {
-                    isNationalHoliday: true
-                };
-            }
-            else {
-                // return true;
-                daysOfYear[i].day = {
-                    isNationalHoliday: false
-                };
-            }
-        }
+        daysOfYear[i].isNationalHoliday = nationalHolidays.some((item) => item.date === daysOfYear[i].date);
     }
 }
 
-function isGapDay(year) {
-    const daysOfYear = get365days(year);
-
+//works fine
+function isGapDay() {
     for (let i = 1; i < daysOfYear.length - 1; i++) {
         let previousDay = daysOfYear[i - 1];
         let nextDay = daysOfYear[i + 1];
 
-        if ((previousDay === isWeekend || previousDay === isNationalHoliday)
-            && (nextDay === isWeekend || nextDay === isNationalHoliday)) {
-            daysOfYear[i].day = {
-                isGapDay: true
-            }
-        }
-        else {
-            daysOfYear[i].day = {
-                isGapDay: false
-            }
-        }
+        daysOfYear[i].isGapDay = (previousDay.isWeekend || previousDay.isNationalHoliday)
+            && (nextDay.isWeekend || nextDay.isNationalHoliday);
     }
 }
+
+// TODO company holidays
+async function isCompanyHoliday() {
+    const companyHolidays = await fetchJson('json/companyholidays.json')
+
+    for (let i = 0; i < daysOfYear.length; i++) {
+        daysOfYear[i].isCompanyHoliday = companyHolidays.some((item) => item.date === daysOfYear[i].date);
+    }
+}
+
+// async function getFullInfoYear(year) {
+//     get365days(year);
+//     isWeekend();
+//     isNationalHoliday();
+//     console.log(isGapDay());
+//     isCompanyHoliday();
+// }
