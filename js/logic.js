@@ -117,9 +117,9 @@ async function getConsumeVacationDates(year) {
     }
 }
 
-//192,5h vacation on Jan 1st of each year
+//176h vacation on Jan 1st of each year
 
-function getWorkHoursOfDay() {
+function getHoursToConsume() {
     for (let i = 0; i < consumeVacationDays.length; i++) {
         if (consumeVacationDays[i].date.includes("Fri")) {
             consumeVacationDays[i].hoursToConsume = 5.5;
@@ -129,4 +129,18 @@ function getWorkHoursOfDay() {
         }
     }
     return consumeVacationDays;
+}
+
+const getneedaname = (date, obj = {}) => {
+    return ({
+        date: date,
+        mustConsumeVacationHours: false, // default value
+        hoursToConsume: 0.0, // default value
+        minVacationHoursNeeded: 0.0,
+        ...obj,
+    });
+}
+
+function needaname() {
+ 
 }
