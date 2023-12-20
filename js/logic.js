@@ -30,7 +30,6 @@ async function fetchJson(path) {
     return r;
 }
 
-//works fine
 const getYear = (year) => {
     fullyear = [];
 
@@ -46,14 +45,12 @@ const getYear = (year) => {
     }
 }
 
-//works fine
 function isWeekend() {
     for (let i = 0; i < fullyear.length; i++) {
         fullyear[i].isWeekend = fullyear[i].date.includes("Sat") || fullyear[i].date.includes("Sun")
     }
 }
 
-//works fine
 async function isNationalHoliday() {
     const nationalHolidays = await fetchJson('json/aut_nationalholidays.json');
     for (let i = 0; i < fullyear.length; i++) {
@@ -61,21 +58,21 @@ async function isNationalHoliday() {
     }
 }
 
-//works fine
 function isGapDay() {
     for (let i = 1; i < fullyear.length - 1; i++) {
         let currentDay = fullyear[i];
         let previousDay = fullyear[i - 1];
         let nextDay = fullyear[i + 1];
 
-        fullyear[i].isGapDay =
-            (currentDay.isWeekend === false)
-            && (previousDay.isWeekend || previousDay.isNationalHoliday)
-            && (nextDay.isWeekend || nextDay.isNationalHoliday);
+        currentDay.isGapDay =
+            currentDay.isWeekend === false
+            && currentDay.isNationalHoliday === false
+            && currentDay.isCompanyHoliday === false
+            && (previousDay.isWeekend || previousDay.isNationalHoliday || previousDay.isCompanyHoliday)
+            && (nextDay.isWeekend || nextDay.isNationalHoliday || nextDay.isCompanyHoliday);
     }
 }
 
-// works fine
 async function isCompanyHoliday() {
     const companyHolidays = await fetchJson('json/companyholidays.json')
     for (let i = 0; i < fullyear.length; i++) {
@@ -83,11 +80,53 @@ async function isCompanyHoliday() {
     }
 }
 
-// TODO fix this!!!!!!!
 async function getFullInfoYear(year) {
     getYear(year);
     isWeekend();
     await isNationalHoliday();
     isGapDay();
     await isCompanyHoliday();
+}
+
+let consumeVacationDays = [];
+
+const getVacationDay = (date, obj = {}) => {
+    return ({
+        date: date,
+        hoursToConsume: 0.0, // default value
+        ...obj,
+    });
+}
+
+// goes through array which consists of full information of each day and lifts out the days on which vacation needs to be taken
+async function getConsumeVacationDates(year) {
+    consumeVacationDays = [];
+    await getFullInfoYear(year);
+    let consume = false;
+    let counter = 0;
+
+    for (let i = 0; i < fullyear.length; i++) {
+        consume = fullyear[i].isGapDay || fullyear[i].isCompanyHoliday;
+        if (consume) {
+            const vacationDay = {
+                ...getVacationDay(fullyear[i].date)
+            };
+            consumeVacationDays.push(vacationDay);
+            counter++;
+        }
+    }
+}
+
+//192,5h vacation on Jan 1st of each year
+
+function getWorkHoursOfDay() {
+    for (let i = 0; i < consumeVacationDays.length; i++) {
+        if (consumeVacationDays[i].date.includes("Fri")) {
+            consumeVacationDays[i].hoursToConsume = 5.5;
+        }
+        else {
+            consumeVacationDays[i].hoursToConsume = 8.25;
+        }
+    }
+    return consumeVacationDays;
 }

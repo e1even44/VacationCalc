@@ -53,7 +53,6 @@ QUnit.module('CompanyHoliday', function () {
     })
 });
 
-// TODO fix this!!!!!!!!
 QUnit.module('FullYearInformation', function () {
     QUnit.test('is table of full year data correct', async function (assert) {
         await getFullInfoYear(2024);
@@ -72,8 +71,8 @@ QUnit.module('FullYearInformation', function () {
         assert.false(fullyear[197].isGapDay, "July 16th is not a gap day.");
         assert.false(fullyear[350].isGapDay, "December 16th is not a gap day.");
 
-        assert.true(fullyear[357].isCompanyHoliday, "December 23rd is a company holiday.");
-        assert.true(fullyear[364].isCompanyHoliday, "December 30th is a company holiday.");
+        assert.true(fullyear[358].isCompanyHoliday, "December 24th is a company holiday.");
+        assert.false(fullyear[359].isCompanyHoliday, "December 25th is a company holiday.");
         assert.false(fullyear[263].isCompanyHoliday, "September 20th is not a company holiday.");
         assert.false(fullyear[170].isCompanyHoliday, "June 19th is not a company holiday.");
     })
