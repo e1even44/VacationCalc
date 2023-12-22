@@ -17,7 +17,7 @@ const getDay = (date, obj = {}) => {
         isCompanyHoliday: false, // default value
         mustConsumeVacationHours: false, // default value
         hoursToConsume: 0.00, // default value
-        minVacationHoursNeeded: 176.00,  // default value
+        minVacationHoursNeeded: 0.00,  // default value
         ...obj,
     });
 }
@@ -64,10 +64,22 @@ async function isNationalHoliday() {
     }
 }
 
+// iterates through fullYear array and compares it to fetched json-file 'companyholidays' to check if day is a national holiday
+async function isCompanyHoliday() {
+    const companyHolidays = await fetchJson('json/companyholidays.json')
+    for (let i = 0; i < fullYear.length; i++) {
+        fullYear[i].isCompanyHoliday = companyHolidays.some((item) => item.date === fullYear[i].date);
+    }
+}
+
 // iterates through fullYear array and checks if day is gap day
 // a gap day is a day inbetween to work-off-days
 // e.g. Thursday national holiday - Friday workday - Saturday weekend (in this case, Friday is a gap day) 
-function isGapDay() {
+async function isGapDay() {
+    isWeekend();
+    await isNationalHoliday();
+    await isCompanyHoliday();
+
     for (let i = 1; i < fullYear.length - 1; i++) {
         let currentDay = fullYear[i];
         let previousDay = fullYear[i - 1];
@@ -82,61 +94,55 @@ function isGapDay() {
     }
 }
 
-// iterates through fullYear array and compares it to fetched json-file 'companyholidays' to check if day is a national holiday
-async function isCompanyHoliday() {
-    const companyHolidays = await fetchJson('json/companyholidays.json')
+// goes through array which consists of full information of each day and lifts out the days on which vacation needs to be taken
+async function getConsumeVacationDates() {
     for (let i = 0; i < fullYear.length; i++) {
-        fullYear[i].isCompanyHoliday = companyHolidays.some((item) => item.date === fullYear[i].date);
+        fullYear[i].mustConsumeVacationHours = fullYear[i].isGapDay || fullYear[i].isCompanyHoliday;
+    }
+}
+
+// goes through consumeVacationDays array and sets vacation hours needed to be taken
+function getHoursToConsume() {
+    let sumVacationHours = 0;
+
+    for (let i = 0; i < fullYear.length; i++) {
+        if (fullYear[i].mustConsumeVacationHours) {
+            if (fullYear[i].date.includes("Fri")) {
+                fullYear[i].hoursToConsume = 5.5;
+            }
+            else {
+                fullYear[i].hoursToConsume = 8.25;
+            }
+        }
+        else {
+            fullYear[i].hoursToConsume = 0.00;
+        }
+
+        sumVacationHours += fullYear[i].hoursToConsume;
+    }
+    return sumVacationHours;
+}
+
+function calcMinNeededVacationHours() {
+    let minVacationHoursToTake = getHoursToConsume();
+    const updatedHoursArray = [minVacationHoursToTake];
+
+    for (let i = 1; i < fullYear.length; i++) {
+        const previousDayConsumedHours = fullYear[i - 1].hoursToConsume;
+        const updatedMinVacationHours = updatedHoursArray[i - 1] - previousDayConsumedHours;
+        updatedHoursArray.push(updatedMinVacationHours);
+    }
+    // updating  original array with the min vacation hours
+    fullYear[0].minVacationHoursNeeded = minVacationHoursToTake;
+    for (let i = 1; i < fullYear.length; i++) {
+        fullYear[i].minVacationHoursNeeded = updatedHoursArray[i];
     }
 }
 
 // function calls all of the functions above and sets all properties
 async function getFullInfoYear(year) {
     getYear(year);
-    isWeekend();
-    await isNationalHoliday();
-    isGapDay();
-    await isCompanyHoliday();
-}
-
-// collection of days in which employees need to consume their vacation hours
-let consumeVacationDays = [];
-
-const getVacationDay = (date, obj = {}) => {
-    return ({
-        date: date,
-        hoursToConsume: 0.0, // default value
-        ...obj,
-    });
-}
-
-// goes through array which consists of full information of each day and lifts out the days on which vacation needs to be taken
-async function getConsumeVacationDates(year) {
-    consumeVacationDays = [];
-    await getFullInfoYear(year);
-    let consume = false;
-    let counter = 0;
-
-    for (let i = 0; i < fullYear.length; i++) {
-        consume = fullYear[i].isGapDay || fullYear[i].isCompanyHoliday;
-        if (consume) {
-            const vacationDay = {
-                ...getVacationDay(fullYear[i].date)
-            };
-            consumeVacationDays.push(vacationDay);
-            counter++;
-        }
-    }
-}
-
-// goes through consumeVacationDays array and sets vacation hours needed to be taken
-function getHoursToConsume() {
-    for (let i = 0; i < consumeVacationDays.length; i++) {
-        if (consumeVacationDays[i].date.includes("Fri")) {
-            consumeVacationDays[i].hoursToConsume = 5.5;
-        }
-        else {
-            consumeVacationDays[i].hoursToConsume = 8.25;
-        }
-    }
+    await isGapDay();
+    await getConsumeVacationDates();
+    calcMinNeededVacationHours();
 }

@@ -1,4 +1,4 @@
-document.querySelector('datetd').innerText = new Date().toLocaleDateString();
+const datetd = document.querySelector('datetd').innerText = new Date().toLocaleDateString();
 
 function calcPreviousDay() {
     const previousDay = new Date();
