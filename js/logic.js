@@ -146,3 +146,14 @@ async function getFullInfoYear(year) {
     await getConsumeVacationDates();
     calcMinNeededVacationHours();
 }
+
+// gets minimum vacation hours of given day
+async function getMinHoursOfGivenDay(date, year) {
+   await getFullInfoYear(year);
+
+    for (let i = 0; i < fullYear.length; i++) {
+        if (date.toDateString() === fullYear[i].date) {
+            return fullYear[i].minVacationHoursNeeded;
+        }
+    }
+}

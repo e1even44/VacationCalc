@@ -1,3 +1,18 @@
+:root {
+    --ohdeerdark: #00474A;
+    --ohdeeralmostdark: #06767A;
+    --ohdeerlighter: #94B4B5;
+    --linkblue: #0645AD;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
 .container {
     width: 100%;
     height: 100vh;

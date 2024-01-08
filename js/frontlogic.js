@@ -1,23 +1,12 @@
-const datetd = document.querySelector('datetd').innerText = new Date().toLocaleDateString();
+const dateToday = document.getElementById('datepicker').valueAsDate = new Date();
 
-function calcPreviousDay() {
-    const previousDay = new Date();
-    previousDay.setDate(previousDay.getDate() - 1);
-    return previousDay.toLocaleDateString();
+const currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+
+// calling function and update  HTML element
+async function updateMinVacHours() {
+    const minHours = await getMinHoursOfGivenDay(currentDate, currentYear);
+    document.getElementById('minVacHours').innerText = `${minHours}`;
 }
 
-function calcNextDay() {
-    const nextDay = new Date();
-    nextDay.setDate(nextDay.getDate() + 1);
-    return nextDay.toLocaleDateString();
-}
-
-function updateDate() {
-    const resultElement = document.querySelector('datetd');
-    resultElement.textContent = calcPreviousDay();
-}
-
-function updateDateNxt() {
-    const resultElement = document.querySelector('datetd');
-    resultElement.textContent = calcNextDay();
-}
+updateMinVacHours();

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="resturlaubsstunden-rechner">
-    <link rel="stylesheet" type="text/css" href="/css/general-layout.css" />
+    <link rel="stylesheet" type="text/css" href="/css/detailed-layout.css" />
     <link rel="stylesheet" type="text/css" href="/css/page-layout.css" />
     <link rel="icon" type="image/x-icon" href="/resources/logo_excl._name_ico16.ico">
     <title>Oh Deer</title>
@@ -30,13 +30,16 @@
                     <div></div>
                     <div></div>
                     <div>
-                        <button class="round-button" id="left-button" onclick="updateDate()">&laquo;</button>
+                        <button class="round-button" id="left-button">&laquo;</button>
                     </div>
-                    <div id="result">
+                    <!-- <div id="result">
                         <datetd id="displaydate"></datetd>
+                    </div> -->
+                    <div>
+                        <input type="date" id="datepicker" name="datepicker" />
                     </div>
                     <div>
-                        <button class="round-button" id="right-button" onclick="updateDateNxt()">&raquo;</button>
+                        <button class="round-button" id="right-button">&raquo;</button>
                     </div>
                     <div></div>
                     <div>
@@ -45,8 +48,10 @@
                     <div></div>
                     <div></div>
                     <div>
-                        <p>42.5h</p>
+                        <p id="minVacHours"></p>
                     </div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div>
                     <wrapper class="view-freieTage-month">
@@ -100,8 +105,9 @@
     </div>
     <!--page layout-->
 
-    <script src="js/frontlogic.js"></script>
     <script src="/js/logic.js"></script>
+    <script src="js/frontlogic.js"></script>
+
 </body>
 
 </html>
