@@ -6,11 +6,22 @@
 //     isCompanyHoliday: false
 // };
 
-let fullYear = []; // collection of each date of year 
+type Day = {
+    date: string,
+    isWeekend: boolean, // default value
+    isNationalHoliday: boolean, // default value
+    isGapDay: boolean, // default value
+    isCompanyHoliday: boolean, // default value
+    mustConsumeVacationHours: boolean, // default value
+    hoursToConsume: number, // default value
+    minVacationHoursNeeded: number,  // default value
+}
 
-const getDay = (date, obj = {}) => {
+let fullYear: Day[]; // collection of each date of year 
+
+const getDay = (startDate: Date): Day => {
     return ({
-        date: date.toDateString(),
+        date: startDate.toDateString(),
         isWeekend: false, // default value
         isNationalHoliday: false, // default value
         isGapDay: false, // default value
@@ -18,32 +29,29 @@ const getDay = (date, obj = {}) => {
         mustConsumeVacationHours: false, // default value
         hoursToConsume: 0.00, // default value
         minVacationHoursNeeded: 0.00,  // default value
-        ...obj,
     });
 }
 
 // fetches data from json file and returns js-readable array
-async function fetchJson(path) {
+async function fetchJson(path: string) {
     const r = await fetch(`../${path}`)
         .then(response => response.json());
 
-    r.forEach(element => {
+    r.forEach((element: Day) => {
         element.date = new Date(element.date).toDateString();
     });
     return r;
 }
 
 // iterates through given year and creates getDay object for each day of year to store it in fullYear array 
-const getYear = (year) => {
+const getYear = (year: number) => {
     fullYear = [];
 
     const startDate = new Date(year, 0, 1); // jan 1st 
     const endDate = new Date(year, 11, 31); // decemter 31th
 
     while (startDate <= endDate) {
-        const day = {
-            ...getDay(startDate)
-        };
+        const day = getDay(startDate);
         fullYear.push(day);
         startDate.setDate(startDate.getDate() + 1);
     }
@@ -60,7 +68,7 @@ function isWeekend() {
 async function isNationalHoliday() {
     const nationalHolidays = await fetchJson('json/aut_nationalholidays.json');
     for (let i = 0; i < fullYear.length; i++) {
-        fullYear[i].isNationalHoliday = nationalHolidays.some((item) => item.date === fullYear[i].date);
+        fullYear[i].isNationalHoliday = nationalHolidays.some((item: Day) => item.date === fullYear[i].date);
     }
 }
 
@@ -68,7 +76,7 @@ async function isNationalHoliday() {
 async function isCompanyHoliday() {
     const companyHolidays = await fetchJson('json/companyholidays.json')
     for (let i = 0; i < fullYear.length; i++) {
-        fullYear[i].isCompanyHoliday = companyHolidays.some((item) => item.date === fullYear[i].date);
+        fullYear[i].isCompanyHoliday = companyHolidays.some((item: Day) => item.date === fullYear[i].date);
     }
 }
 
@@ -140,15 +148,15 @@ function calcMinNeededVacationHours() {
 }
 
 // function calls all of the functions above and sets all properties
-async function getFullInfoYear(year) {
+async function getFullInfoYear(year: number) {
     getYear(year);
     await isGapDay();
     await getConsumeVacationDates();
     calcMinNeededVacationHours();
 }
 
-// gets minimum vacation hours of given day>
-async function getMinHoursOfGivenDay(date, year) {
+// gets minimum vacation hours of given day
+async function getMinHoursOfGivenDay(date: Date, year: number) {
     await getFullInfoYear(year);
 
     for (let i = 0; i < fullYear.length; i++) {
@@ -158,17 +166,17 @@ async function getMinHoursOfGivenDay(date, year) {
     }
 }
 
-async function getNationalHolidaysOfGivenMonth(month, year) {
+async function getNationalHolidaysOfGivenMonth(month: number, year: number) {
     await getFullInfoYear(year);
     const holidaysOfMonth = [];
-    const counter = 0;
+    let counter: number = 0;
 
     for (let i = 0; i < fullYear.length; i++) {
         const formattedDate = new Date(fullYear[i].date).toLocaleDateString('de-AT');
 
-        if (fullYear[i].isNationalHoliday && formattedDate.month === month) {
-            holidaysOfMonth[counter] = formattedDate;
-            counter++;
-        }
+        // if (fullYear[i].isNationalHoliday && formattedDate.month === month) {
+        //     holidaysOfMonth[counter] = formattedDate;
+        //     counter++;
+        // }
     }
 }
