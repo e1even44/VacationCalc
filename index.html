@@ -12,13 +12,11 @@
 </head>
 
 <body>
-
     <div>
         <img src="resources/logo_incl._name_scaled.png" alt="OhDeer Logo">
         <input type="button" id="button-lightsoff" value="&#x262F">
     </div>
 
-    <!--page layout-->
     <div class="container">
         <div class="toppanel"></div>
         <div class="d-flex">
@@ -30,22 +28,20 @@
                     <div></div>
                     <div></div>
                     <div>
-                        <button class="round-button" id="left-button">&laquo;</button>
+                        <button class="round-button" id="left-button" onclick="getPreviousDay()">&laquo;</button>
                     </div>
-                    <!-- <div id="result">
-                        <datetd id="displaydate"></datetd>
-                    </div> -->
                     <div>
-                        <input type="date" id="datepicker" name="datepicker" />
+                        <input type="date" id="datepicker" aria-label="Datumsauswahl" name="datepicker" min="2023-12-31"
+                            max="2024-12-31" />
                     </div>
                     <div>
                         <button class="round-button" id="right-button">&raquo;</button>
                     </div>
                     <div></div>
                     <div>
-                        <p>min. Urlaubsstunddefen zum Stichtag:</p>
+                        <p>Mindestanzahl an Urlaubsstunden zum Stichtag:</p>
                     </div>
-                    <div></div>
+                    <br>
                     <div></div>
                     <div>
                         <p id="minVacHours"></p>
@@ -53,18 +49,33 @@
                     <div></div>
                     <div></div>
                 </div>
-                <div>
-                    <wrapper class="view-freieTage-month">
-                        <div>
-                            <p class="freedays-month">Freie Tage im aktuellen Monat:</p>
+
+                <div>Ereignisse im aktuellen Monat</div>
+                <br>
+                <div class="events-of-month">
+                    <div>
+                        <p>Feiertage:</p>
+                        <ul>
+                            <li>1.1. Feiertag</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p">Fenstertage:</p>
                             <ul>
-                                <li>6.12. Nikolaus</li>
-                                <li>8.12. Feiertag</li>
-                                <li>24.12. Heilig Abend</li>
+                                <li>2.2. Fenstertag</li>
+                                <li></li>
                             </ul>
-                        </div>
-                    </wrapper>
+                    </div>
+
+                    <div>
+                        <p>Betriebsurlaubstage:</p>
+                        <ul>
+                            <li>3.3. Betriebsurlaub</li>
+                        </ul>
+                    </div>
                 </div>
+
             </div>
 
             <div class="sidepanel" id="settings">
@@ -103,7 +114,6 @@
             <div class="mockup-link">FAQ</div>
         </div>
     </div>
-    <!--page layout-->
 
     <script src="/js/logic.js"></script>
     <script src="js/frontlogic.js"></script>

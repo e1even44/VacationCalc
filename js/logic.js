@@ -147,13 +147,28 @@ async function getFullInfoYear(year) {
     calcMinNeededVacationHours();
 }
 
-// gets minimum vacation hours of given day
+// gets minimum vacation hours of given day>
 async function getMinHoursOfGivenDay(date, year) {
-   await getFullInfoYear(year);
+    await getFullInfoYear(year);
 
     for (let i = 0; i < fullYear.length; i++) {
         if (date.toDateString() === fullYear[i].date) {
             return fullYear[i].minVacationHoursNeeded;
+        }
+    }
+}
+
+async function getNationalHolidaysOfGivenMonth(month, year) {
+    await getFullInfoYear(year);
+    const holidaysOfMonth = [];
+    const counter = 0;
+
+    for (let i = 0; i < fullYear.length; i++) {
+        const formattedDate = new Date(fullYear[i].date).toLocaleDateString('de-AT');
+
+        if (fullYear[i].isNationalHoliday && formattedDate.month === month) {
+            holidaysOfMonth[counter] = formattedDate;
+            counter++;
         }
     }
 }

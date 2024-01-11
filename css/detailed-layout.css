@@ -68,10 +68,6 @@ button.round-button:hover {
     font-size: 24px;
 }
 
-p.freedays-month {
-    margin: 30px 30px 10px;
-}
-
 .mockup-link {
     color: var(--linkblue);
     cursor: pointer;
@@ -128,4 +124,14 @@ li{
     font-size:70%;
     font-family: sans-serif;
     /* TODO modify datepicker style */
+}
+
+.events-of-month{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+p.events-of-month{
+    margin: 30px 30px 10px;
 }
