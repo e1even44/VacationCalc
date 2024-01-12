@@ -102,10 +102,19 @@ async function isGapDay() {
     }
 }
 
-// goes through array which consists of full information of each day and lifts out the days on which vacation needs to be taken
-async function getConsumeVacationDates() {
+// goes through array which consists of full information of each day and lifts out the days 
+// on which vacation needs to be taken
+async function getConsumeVacationDates(inputGapDays: boolean, inputCompanyHolidays: boolean) {
     for (let i = 0; i < fullYear.length; i++) {
-        fullYear[i].mustConsumeVacationHours = fullYear[i].isGapDay || fullYear[i].isCompanyHoliday;
+        if (!inputGapDays) {
+            fullYear[i].mustConsumeVacationHours = fullYear[i].isCompanyHoliday;
+        }
+        if (!inputCompanyHolidays) {
+            fullYear[i].mustConsumeVacationHours = fullYear[i].isGapDay;
+        }
+        else {
+            fullYear[i].mustConsumeVacationHours = fullYear[i].isGapDay || fullYear[i].isCompanyHoliday;
+        }
     }
 }
 
@@ -148,35 +157,20 @@ function calcMinNeededVacationHours() {
 }
 
 // function calls all of the functions above and sets all properties
-async function getFullInfoYear(year: number) {
+async function getFullInfoYear(year: number, inputGapDays: boolean, inputCompanyHolidays: boolean) {
     getYear(year);
     await isGapDay();
-    await getConsumeVacationDates();
+    await getConsumeVacationDates(inputGapDays, inputCompanyHolidays);
     calcMinNeededVacationHours();
 }
 
 // gets minimum vacation hours of given day
-async function getMinHoursOfGivenDay(date: Date, year: number) {
-    await getFullInfoYear(year);
+async function getMinHoursOfGivenDay(date: Date, year: number, inputGapDays: boolean, inputCompanyHolidays: boolean) {
+    await getFullInfoYear(year, inputGapDays, inputCompanyHolidays);
 
     for (let i = 0; i < fullYear.length; i++) {
         if (date.toDateString() === fullYear[i].date) {
             return fullYear[i].minVacationHoursNeeded;
         }
-    }
-}
-
-async function getNationalHolidaysOfGivenMonth(month: number, year: number) {
-    await getFullInfoYear(year);
-    const holidaysOfMonth = [];
-    let counter: number = 0;
-
-    for (let i = 0; i < fullYear.length; i++) {
-        const formattedDate = new Date(fullYear[i].date).toLocaleDateString('de-AT');
-
-        // if (fullYear[i].isNationalHoliday && formattedDate.month === month) {
-        //     holidaysOfMonth[counter] = formattedDate;
-        //     counter++;
-        // }
     }
 }
