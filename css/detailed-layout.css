@@ -26,6 +26,7 @@ input {
     margin: 0.4rem;
 }
 
+/* TODO arrow buttons left right to change day coming soon  */
 button.round-button {
     border-radius: 100%;
     height: 1.87rem;
@@ -36,6 +37,7 @@ button.round-button {
     cursor: pointer;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     transition: background-color 0.5s;
+    visibility: hidden;
 }
 
 button.round-button:hover {
@@ -65,20 +67,24 @@ button.round-button:hover {
     margin: 20px 10px 5px;
     text-align: left;
     font-weight: bolder;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .mockup-link {
     color: var(--linkblue);
-    cursor: pointer;
-    font-weight: bolder;
-    margin: 0px 15px 20px;
+    font-weight:lighter;
+    font-size:small;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;   
+    cursor: no-drop;
 }
 
 .mockup-link:hover {
     text-decoration: underline;
 }
 
+/* TODO button to change to dark mode coming soon */
 #button-lightsoff {
     height: 60px;
     width: 60px;
@@ -91,6 +97,7 @@ button.round-button:hover {
     font-weight: bold;
     cursor: pointer;
     transition: color 0.5s;
+    visibility: hidden;
 }
 
 #button-lightsoff:hover {
@@ -107,7 +114,7 @@ li{
     background-color:var(--ohdeeralmostdark);
     color: white;
     font-weight: bolder;
-    border-color: transparent;
+    border-color: transparent;    
     cursor: pointer;
     border-radius: 14px;
     transition: background-color 0.5s;
@@ -123,7 +130,9 @@ li{
     background-color: transparent;
     font-size:70%;
     font-family: sans-serif;
-    /* TODO modify datepicker style */
+    font-weight: bolder;
+    filter: invert(100%);
+    cursor: pointer;
 }
 
 .events-of-month{
