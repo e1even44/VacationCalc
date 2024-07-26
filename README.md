@@ -1,4 +1,4 @@
-# I need a cool name for this project.
+# Vacation Calculator.
 
 ## Functionality
 
